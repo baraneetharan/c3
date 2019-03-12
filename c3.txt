@@ -1,0 +1,106 @@
+using System;
+
+class User
+{
+    public int id;
+    public string name;
+
+    public User() { }
+    public User(string name, int id)
+    {
+        this.name = name; this.id = id;
+    }
+}
+
+
+
+using System;
+
+namespace datatypes
+{
+    class Program
+    {
+        User[] users = new User[3];
+
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+            p.addUser();
+            p.getAllUsers();
+            p.getOneUser();
+            p.removeUser();
+            p.getAllUsers();
+            p.updateUser();
+            p.getAllUsers();
+        }
+
+        public void addUser()
+        {
+
+            string inputName;
+            int inputId;
+
+            Console.WriteLine("***** addUser *****");
+            for (int i = 0; i < users.Length; i++)
+            {
+                Console.WriteLine("Enter Name");
+                inputName = Console.ReadLine();
+                Console.WriteLine("Enter Id");
+                inputId = Convert.ToInt32(Console.ReadLine());
+                users[i] = new User(inputName, Convert.ToInt32(inputId));
+            }
+        }
+
+        public void getAllUsers()
+        {
+            Console.WriteLine("***** printUser *****");
+            foreach (var item in users)
+            {
+                if (item != null)
+                {
+                    Console.WriteLine(item.name + " " + item.id);
+                }
+                else
+                {
+                    Console.WriteLine("null");
+                }
+            }
+        }
+
+        public void getOneUser()
+        {
+            Console.WriteLine("Enter your Id to get details");
+            int getUserId = Convert.ToInt32(Console.ReadLine());
+            User getUser = Array.Find(users, x => x.id == getUserId);
+            Console.WriteLine(getUser.id + " " + getUser.name);
+        }
+
+        public void updateUser()
+        {
+            Console.WriteLine("Enter your Id to update user details");
+            int updateUserId = Convert.ToInt32(Console.ReadLine());
+            User updateUser = Array.Find(users, x => x.id == updateUserId);
+            Console.WriteLine("Enter your name to be updated");
+            String updateUserName = Console.ReadLine();
+            updateUser.name = updateUserName;
+        }
+
+        public void removeUser()
+        {
+            Console.WriteLine("Enter your Id to remove user details");
+            int removeUserId = Convert.ToInt32(Console.ReadLine());
+            User removeUser = Array.Find(users, x => x.id == removeUserId);
+            removeUser.id = 0;
+            removeUser.name = "";
+        }
+        public void removeUser1()
+        {
+            Console.WriteLine("Enter your Id to remove user details");
+            int removeUserId = Convert.ToInt32(Console.ReadLine());
+            var index = Array.FindIndex(users, row => row.id == removeUserId);
+            Array.Clear(users, index, 1);
+            Console.WriteLine("remove index = " + index);
+        }
+
+    }
+}
